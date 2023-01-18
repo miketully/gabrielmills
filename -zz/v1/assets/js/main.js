@@ -2,8 +2,7 @@ const IMGS = 34
 const CHANNELS = {
     paintings : { slug: "paintings-gabriel-mills", container: "painting-list"},
     installations: { slug: "installations-gabriel-mills-qjw7sudzywq", container: "installation-list"},
-    videos: {slug: "videos-gabriel-mills", container: "video-list"},
-    writing: { slug: "writing-gabriel-mills", container: "writing-list"}
+    videos: {slug: "videos-gabriel-mills", container: "video-list"}
 }
 
 
@@ -59,12 +58,6 @@ async function renderTitle(slug, containerID, reverseOrder = false) {
         } else if (slug.includes("installations") && chanelSlug) {
             const slideHTML = "installations"
             a.href = `./${slideHTML}?title=${chanelSlug}`
-        } else if (slug.includes("writing")) {
-            const slideHTML = "writing"
-            a.href = `./${slideHTML}?title=${title}`
-        } else if (slug.includes("videos")) {
-            const slideHTML = "videos"
-            a.href = `./${slideHTML}?title=${sanitizeString(title)}`
         }
         a.textContent = title
         li.appendChild(a)
@@ -78,23 +71,28 @@ async function renderTitle(slug, containerID, reverseOrder = false) {
     })
 }
 
-
-async function handleTitleList() {
-    for (let channel in CHANNELS) {
-        let order = channel === "videos" ? false : true
-        await renderTitle(CHANNELS[channel].slug, CHANNELS[channel].container, order)
-    }
+async function paintingTitles (){
+    await renderTitle(CHANNELS.paintings.slug, CHANNELS.paintings.container, true)
 }
 
-function sanitizeString(str) {
-    return str.replace(/[^a-zA-Z0-9 ]/g, "")
-        .replace(/\s+/g, "_")
-        .toLowerCase();
+async function installationTitles (){
+    await renderTitle(CHANNELS.installations.slug, CHANNELS.installations.container, true)
+}
+
+async function videoTitles (){
+    await renderTitle(CHANNELS.videos.slug, CHANNELS.videos.container)
+}
+
+
+async function handleLinkList () {
+    await paintingTitles()
+    await installationTitles ()
+    await videoTitles ()
 }
 
 
 
 window.onload = function (){
     handleHeader() 
-    handleTitleList()
+    handleLinkList()
 }

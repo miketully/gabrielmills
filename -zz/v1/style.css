@@ -12,6 +12,7 @@
 ******************************/
 
 * {
+  background-color: #FFF;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -68,7 +69,6 @@ body {
   margin:0;
   width: 100%;
   overflow-x: hidden;
-  background-color: #FFF;
 }
 
 .header {
@@ -109,7 +109,7 @@ body {
   width: var( --indexWidth);
   height: auto;
 
-  font-family: 'True Sans Book';
+  font-family: 'True Serif Book';
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
@@ -186,82 +186,6 @@ a:hover {
 ******************************/
 
 
-
-/***** Writing and Information *****/
-
-.sliderText{
-  width: 100%;
-  height: 90vh;
-  padding-block: 1rem;
-  position: relative;
-  overflow: hidden;
-  margin-block-end: 1rem;
-
-  font-family: 'True Sans Book';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  color: #000000;
-  display: flex;
-}
-
-.readleft__btn, .readright__btn{
-  width: 40%;
-  height: 100%;
-}
-
-.readleft__btn {
-  cursor: w-resize;
-}
-
-.readright__btn{
-  cursor: e-resize;
-}
-
-.slideshow-frameText {
-  margin: 0 auto;
-  height:inherit;
-  width: 100%;
-  max-height: 100%;
-  max-width: 100%;
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;  
-  background-size: contain;
-  
-}
-
-.text-wrapper{
-  width: inherit;
-  height: inherit;
-  overflow: hidden;
-  display: none;
-}
-
-.text-wrapper.active{
-  display: block;
-}
-
-.text-frame{
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
-    box-sizing: content-box; /* So the width will be 100% + 17px */
-  background-color: white;
-}
-
-
-.text-frame p:first-child{
-  padding-block-start: 2rem;
-}
-
-.text-frame p:not(:last-child) { 
-  margin-bottom: 1rem
-}
-
 /***** Image Carousel *****/
 
 .slider{
@@ -325,25 +249,7 @@ ul.slideshow-frame li img {
 }
 
 
-/***** Video Carousel *****/
-.slider.video{
-  display: flex;
-  padding-inline: 0;
-  
-}
 
-.left__btn.video, .right__btn.video {
-  position: initial;
-  width: 10%;
-}
-
-.slide.video{
-  width: var(--indexWidth);
-}
-
-.slide.video video{
-  width: inherit;
-}
 
 
 /***** Captions, Counter, and Nav *****/
@@ -354,7 +260,7 @@ ul.slideshow-frame li img {
   display: flex; 
   justify-content: space-between;
 
-  font-family: 'True Sans Book';
+  font-family: 'True Serif Book';
   font-style: normal;
   font-weight: 300;
   font-size: 14px;
