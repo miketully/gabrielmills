@@ -4,12 +4,13 @@ const frameTitle = document.querySelector(".slideshow-caption")
 
 async function handleArenaContent(channel) {
         const randomString = Math.random().toString(16).slice(2)
-        const contentUrl = `https://api.are.na/v2/channels/${channel}?sort=position&order=asc&per=100?nocache=${randomString}`
+        const contentUrl = `https://api.are.na/v2/channels/${channel}?sort=position&order=desc&per=100?nocache=${randomString}`
         return fetch(contentUrl).then(data => data.json())
 }
 
 async function renderTextFrames({slug, container}){
         const { contents } = await handleArenaContent(slug)
+        contents.reverse()
         const containerElement = document.querySelector(container)
         total.textContent = contents.length
         

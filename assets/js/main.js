@@ -81,8 +81,8 @@ async function renderTitle(slug, containerID, reverseOrder = false) {
 
 async function handleTitleList() {
     for (let channel in CHANNELS) {
-        let order = channel === "videos" ? false : true
-        await renderTitle(CHANNELS[channel].slug, CHANNELS[channel].container, order)
+        // let order = channel === "videos" ? false : true
+        await renderTitle(CHANNELS[channel].slug, CHANNELS[channel].container, true)
     }
 }
 

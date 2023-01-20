@@ -126,15 +126,29 @@ body {
   column-count: 3;
 }
 
+.index-item-bio {
+  width: calc((var( --indexWidth)/3) * 2);
+  display: inline-block;
+}
+
+.index-item-bio p:not(:first-child) {
+  margin-top: 0.5rem;
+}
+
+.index-item-bio p:last-of-type {
+  margin-top: 3rem;
+}
+
 .index-item, .index-heading {
   width: 100%;
   text-align: left;
+  -webkit-column-break-after: always;
 }
 
 .index-paintings .index-item, .index-installations .index-item, .index-videos .index-item, .index-writing .index-item {
   width: calc((var( --indexWidth)/3) * 2);
   height: auto;
-  display: inline-block;
+  display: inline;
   column-span: all;
   columns: 2;
 }
@@ -384,6 +398,7 @@ p.slideshow-index {
 @keyframes headerHeightShrink {
   100% {
     height: 25vh;
+    
   }
 }
 
