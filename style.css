@@ -4,6 +4,7 @@
 :root {
   --headerheight: 88vh;
   --indexWidth: 86vw;
+  --vh: 100%;
 }
 
 
@@ -25,6 +26,10 @@
 ::selection { 
     background: black;
     color: white;
+}
+
+html{
+  height: fill-available;
 }
 
 @font-face {
@@ -67,6 +72,7 @@
 body {
   margin:0;
   width: 100%;
+  height: var(--vh);
   overflow-x: hidden;
   background-color: #FFF;
 }
@@ -411,59 +417,19 @@ p.slideshow-index {
     Mobile 
 ******************************/
 
+@media (max-height: 53rem){
 
-@media only screen and (max-width: 900px) {
-  
-  /**** CHAT GPT MOBILE FORMATTING RECS ****/
-
-    /***************************** 
-        CSS Variables
-    ******************************/
-
-    
-
-    /***************************** 
-        Global Styles 
-    ******************************/
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    /* add media queries to adjust layout for smaller screens */
-    @media only screen and (max-width: 600px) {
-      .header {
-        flex-direction: column; /* change header layout to be stacked on top of each other */
-        height: 50vh; /* reduce the height of the header for mobile */
-      }
-      .triptych__container {
-        flex-wrap: wrap; /* wrap triptych sections to fit on smaller screens */
-      }
-      .triptych {
-        width: 50%; /* reduce the width of the triptych sections for mobile */
-      }
-      .index-main, .index-paintings, .index-installations, .index-videos, .index-writing {
-        column-count: 2; /* change column count for smaller screens */
-        font-size: 1em; /* adjust font-size for smaller screens */
-        width: auto;
-        height: auto;
-      }
-
-      .index-item, .index-heading {
-        text-align: left;
-        display: inline-block;
-        padding-bottom: 1em;
-      }
-
-    }
-
-
-
+body{
+  background-color: tomato;
+}
+.triptych {
+  background-size: calc(auto/1.5);
 
 /***** Image Carousel *****/
 
+.slider{
+  height: 75vh;
+}
 
 ul.slideshow-frame li img {
   max-width: 100vw;
