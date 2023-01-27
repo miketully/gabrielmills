@@ -417,138 +417,168 @@ p.slideshow-index {
     Mobile 
 ******************************/
 
-@media (max-height: 53rem){
 
-body{
-  background-color: tomato;
-}
-.triptych {
-  background-size: calc(auto/1.5);
-
-/***** Image Carousel *****/
-
-.slider{
-  height: 75vh;
-}
-
-ul.slideshow-frame li img {
-  max-width: 100vw;
-  max-height: 90vh;
-
-}
-
-/***** Video Carousel *****/
-.slider.video{
-  display: flex;
-  padding-inline: 0;
+@media (max-width: 60rem){
   
-}
-
-.left__btn.video, .right__btn.video {
-  position: initial;
-  width: 10%;
-}
-
-.slide.video{
-  width: 100vw;
-}
-
-.slide.video video{
-  width: inherit;
-}
-
-
-/***** Writing and Information *****/
-
-.sliderText{
-  width: 100%;
-  height: 90vh;
-  padding-block: 1rem;
-  position: relative;
-  overflow: hidden;
-  margin-block-end: 1rem;
-
-  font-family: 'True Sans Book';
-  font-style: normal;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 20px;
-  color: #000000;
-  display: flex;
-}
-
-.readleft__btn, .readright__btn{
-  width: 8%;
-  height: 100%;
-}
-
-.readleft__btn {
-  cursor: w-resize;
-}
-
-.readright__btn{
-  cursor: e-resize;
-}
-
-.slideshow-frameText {
-  margin: 0 auto;
-  height:inherit;
-  width: 100%;
-  max-height: 100%;
-  max-width: 100%;
+  /***************************** 
+      Global Styles 
+  ******************************/
   
-  display: flex;
-  align-items: center;
-  justify-content: center;  
-  background-size: contain;
   
-}
-
-.text-wrapper{
-  width: inherit;
-  height: inherit;
-  overflow: hidden;
-  display: none;
-}
-
-.text-wrapper.active{
-  display: block;
-}
-
-.text-frame{
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
-    box-sizing: content-box; /* So the width will be 100% + 17px */
-  background-color: white;
-}
-
-
-.text-frame p:first-child{
-  padding-block-start: 2rem;
-}
-
-.text-frame p:not(:last-child) { 
-  margin-bottom: 1rem
-}
-
-/***** Information *****/
-
-
-.index-item-bio {
-  width: 72vw;
-  display: inline-block;
-}
-
-.index-item-bio p:not(:first-child) {
-  margin-top: 0.5rem;
-}
-
-.index-item-bio p:last-of-type {
-  margin-top: 3rem;
-}
-
-
-}
-
+    .header {
+      flex-direction: column; /* change header layout to be stacked on top of each other */
+      height: 70vh; /* reduce the height of the header for mobile */
+    }
+  
+    .index-main, .index-paintings, .index-installations, .index-videos, .index-writing {
+      column-count: 2; /* change column count for smaller screens */
+      font-size: 1em; /* adjust font-size for smaller screens */
+      width: auto;
+      height: auto;
+    }
+  
+    .index-heading, .index-item, .index-item-bio {
+      text-align: left;
+      column-span: all;
+      display: block;
+      padding-bottom: 1em;
+    }
+  
+    .index-item.info, .index-item.mail{
+      column-span: inherit;
+      padding: 0;
+    }
+  
+  
+  /***************************** 
+      Content Subsections
+  ******************************/
+  
+  /***** Image Carousel *****/
+  
+  .slider{
+    height: 75vh;
+  }
+  
+  ul.slideshow-frame li img {
+    max-width: 100vw;
+    max-height: 90vh;
+  
+  }
+  
+  /***** Video Carousel *****/
+  .slider.video{
+    display: flex;
+    padding-inline: 0;
+    
+  }
+  
+  .left__btn.video, .right__btn.video {
+    position: initial;
+    width: 10%;
+  }
+  
+  .slide.video{
+    width: 100vw;
+  }
+  
+  .slide.video video{
+    width: inherit;
+  }
+  
+  
+  /***** Writing and Information *****/
+  
+  .sliderText{
+    width: 100%;
+    height: 90vh;
+    padding-block: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin-block-end: 1rem;
+  
+    font-family: 'True Sans Book';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    display: flex;
+  }
+  
+  .readleft__btn, .readright__btn{
+    width: 8%;
+    height: 100%;
+  }
+  
+  .readleft__btn {
+    cursor: w-resize;
+  }
+  
+  .readright__btn{
+    cursor: e-resize;
+  }
+  
+  .slideshow-frameText {
+    margin: 0 auto;
+    height:inherit;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    background-size: contain;
+    
+  }
+  
+  .text-wrapper{
+    width: inherit;
+    height: inherit;
+    overflow: hidden;
+    display: none;
+  }
+  
+  .text-wrapper.active{
+    display: block;
+  }
+  
+  .text-frame{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
+      box-sizing: content-box; /* So the width will be 100% + 17px */
+    background-color: white;
+  }
+  
+  
+  .text-frame p:first-child{
+    padding-block-start: 2rem;
+  }
+  
+  .text-frame p:not(:last-child) { 
+    margin-bottom: 1rem
+  }
+  
+  /***** Information *****/
+  
+  
+  .index-item-bio {
+    width: 72vw;
+    display: inline-block;
+  }
+  
+  .index-item-bio p:not(:first-child) {
+    margin-top: 0.5rem;
+  }
+  
+  .index-item-bio p:last-of-type {
+    margin-top: 3rem;
+  }
+  
+  
+  }
+  
+  
