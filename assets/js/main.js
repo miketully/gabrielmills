@@ -1,18 +1,18 @@
 const IMGS = 34
 const CHANNELS = {
-    paintings : { slug: "paintings-gabriel-mills", container: "painting-list"},
-    installations: { slug: "installations-gabriel-mills-qjw7sudzywq", container: "installation-list"},
-    videos: {slug: "videos-gabriel-mills", container: "video-list"},
-    writing: { slug: "writing-gabriel-mills", container: "writing-list"}
+    paintings: { slug: "paintings-gabriel-mills", container: "painting-list" },
+    installations: { slug: "installations-gabriel-mills-qjw7sudzywq", container: "installation-list" },
+    videos: { slug: "videos-gabriel-mills", container: "video-list" },
+    writing: { slug: "writing-gabriel-mills", container: "writing-list" }
 }
 
 
 // Utility function
 function splitIntothree(num = 100) {
-    const min  = 20
+    const min = 20
     const max = 50
-    const n1 = Math.floor(Math.random() * (max-min + 1)) + min  //24
-    const n2 = Math.floor(Math.random() * (num-n1-max + 1)) + min
+    const n1 = Math.floor(Math.random() * (max - min + 1)) + min  //24
+    const n2 = Math.floor(Math.random() * (num - n1 - max + 1)) + min
     const n3 = num - n1 - n2
     return [n1, n2, n3]
 }
@@ -20,7 +20,7 @@ function splitIntothree(num = 100) {
 // handlers
 function handleHeader() {
     const res = []
-    for(let i = 1; i < IMGS; i++){
+    for (let i = 1; i < IMGS; i++) {
         let formattedNum = i < 10 ? '0' + i.toString() : i.toString();
         res.push(`./files/header/${formattedNum}.jpg`)
     }
@@ -32,13 +32,99 @@ function handleTriptych(images) {
     const dynamicWidth = splitIntothree()
     triptychs.forEach(t => {
         const randomImageIndx = Math.floor(Math.random() * images.length)
-       t.style.backgroundImage = `url(${images[randomImageIndx]})`;
-       t.style.width = `${dynamicWidth[dynamicWidth.length-1]}vw`;
-       dynamicWidth.pop()
-       images.splice(randomImageIndx, 1)
-       
+        const dw = dynamicWidth[dynamicWidth.length - 1];
+        const imageURL = images[randomImageIndx];
+        t.style.backgroundImage = `url(${imageURL})`;
+        t.style.width = `${dw}vw`;
+        // check the width of the background image and the container and adjust the width of the background image if the background image is smaller than the container width. 
+        // getImageDimensions(imageURL)
+        getBackgroundImageSize(t).then((data) => {
+            const imgWidth = calcNewWidth(data.width, data.height, viewHightToPixels(88))
+            if (imgWidth < viewWidthToPixels(dw)) {
+                scaleBackgroundImage(t, 110)
+            }
+        })
+
+        window.addEventListener('resize', () => {
+            getBackgroundImageSize(t).then((data) => {
+                const imgWidth = calcNewWidth(data.width, data.height, viewHightToPixels(88))
+                if (imgWidth < viewWidthToPixels(dw)) {
+                    scaleBackgroundImage(t, 110)
+                }
+            })
+        })
+
+        dynamicWidth.pop()
+        images.splice(randomImageIndx, 1)
     })
 }
+
+function scaleBackgroundImage(element, scalePercentage) {
+    const originalImage = new Image();
+    originalImage.src = window.getComputedStyle(element).backgroundImage.slice(4, -1).replace(/"/g, "");
+
+    originalImage.onload = function () {
+        const originalWidth = originalImage.width;
+        const originalHeight = originalImage.height;
+        const scaledWidth = originalWidth * (scalePercentage / 100);
+        const scaledHeight = originalHeight * (scalePercentage / 100);
+
+        element.style.backgroundImage = `url(${originalImage.src})`;
+        element.style.backgroundSize = `${scaledWidth}px ${scaledHeight}px`;
+    }
+}
+
+function getBackgroundImageSize(elem) {
+    let computedStyle = getComputedStyle(elem);
+    let bgImage = computedStyle.backgroundImage;
+    let bgImageUrl = bgImage.slice(4, -1).replace(/["']/g, "");
+    let image = new Image();
+    image.src = bgImageUrl;
+    return new Promise((resolve) => {
+        image.onload = function () {
+            resolve({ width: image.width, height: image.height });
+        };
+    });
+}
+
+function calcNewWidth(elementWidth, elementHeight, newImageHeight) {
+    const aspectRatio = elementWidth / elementHeight;
+    return newImageHeight * aspectRatio;
+}
+
+
+function getImageDimensions(imageURl) {
+    const img = new Image();
+    img.src = imageURl;
+    img.onload = function () {
+        console.table(img.width, img.height)
+    }
+}
+
+function viewWidthToPixels(viewWidth) {
+    let widthInPixels = 0;
+
+    // Get the viewport width
+    let viewportWidth = window.innerWidth;
+
+    // Convert view width to pixels
+    widthInPixels = viewWidth * viewportWidth / 100;
+
+    return widthInPixels;
+}
+
+function viewHightToPixels(viewHeight) {
+    let heightInPixels = 0;
+
+    // Get the viewport height
+    let viewportHeight = window.innerHeight;
+
+    // Convert view height to pixels
+    heightInPixels = viewHeight * viewportHeight / 100;
+
+    return heightInPixels;
+}
+
 
 // Get Data from Arena 
 async function handleArenaContent(channel) {
@@ -50,7 +136,7 @@ async function handleArenaContent(channel) {
 async function renderTitle(slug, containerID, reverseOrder = false) {
     const data = await handleArenaContent(slug)
     const titleList = document.getElementById(containerID)
-    const renderTitle = (title, chanelSlug)=> {
+    const renderTitle = (title, chanelSlug) => {
         const li = document.createElement('li')
         const a = document.createElement('a')
         if (slug.includes("paintings")) {
@@ -92,9 +178,12 @@ function sanitizeString(str) {
         .toLowerCase();
 }
 
+const updateViewportHeight = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
+}
 
-
-window.onload = function (){
-    handleHeader() 
+window.onload = function () {
+    handleHeader()
     handleTitleList()
+    updateViewportHeight()
 }

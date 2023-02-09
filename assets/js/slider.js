@@ -113,7 +113,11 @@ function handleSlider() {
         document.addEventListener('keydown', keyPressed)
 }
 
+const updateViewportHeight = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
+}
 
 window.onload = () => {
         sliderImages()
+        updateViewportHeight()
 }
