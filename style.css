@@ -481,6 +481,11 @@ p.slideshow-index {
   
   /***** Image Carousel *****/
   
+  .slider{
+  height: 80vh;
+}
+
+
   
   /***** Video Carousel *****/
   .slider.video{
