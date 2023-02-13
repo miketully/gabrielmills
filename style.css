@@ -126,7 +126,7 @@ body {
 .index-main, .index-paintings, .index-installations, .index-videos, .index-writing {
   width: auto;
   height: auto;
-  border-top: 1px black solid;
+  border-top: .75px black solid;
   padding-top:10px;
   padding-bottom:50px;
   column-count: 3;
