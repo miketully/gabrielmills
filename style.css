@@ -126,7 +126,7 @@ body {
 .index-main, .index-paintings, .index-installations, .index-videos, .index-writing {
   width: auto;
   height: auto;
-  border-top: .5px black solid;
+  border-top: 1px black solid;
   padding-top:10px;
   padding-bottom:50px;
   column-count: 3;
@@ -181,9 +181,14 @@ transition: .5s;
   height: auto;
   display: inline;
   column-span: all;
-  columns: 2;
+  column-count: 2;
 }
 
+@supports (not (break-after:column)){
+  .index-paintings .index-item, .index-installations .index-item, .index-videos .index-item, .index-writing .index-item {
+    display: inline-block;
+  }
+}
 
 h1, h2 {
   font-family: 'True Sans Book', Arial, sans-serif;
